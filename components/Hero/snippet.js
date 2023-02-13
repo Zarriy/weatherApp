@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 
 export default function DataSupport() {
   const result = useSelector((state) => state.searchReducer);
+  const tempScale = useSelector((state) => state.tempReducer.unit);
 
   const data = [
     {
       Icon: BoltIcon,
       value: result.wind.speed,
-      unit: "mph",
+      unit: tempScale === "metric" ? "m/s" : "mph",
     },
     { title: "Pressure", value: result.main.pressure, unit: "hpa" },
     { title: "Humidity", value: result.main.humidity, unit: "%" },
