@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import DataSupport from "./snippet";
 
 export default function CurrentReport() {
-  const result = useSelector((state) => state.searchReducer);
+  const result = useSelector((state) => state.searchReducer.searchResult);
   const tempSymbol = useSelector((state) => state.tempReducer.symbol);
 
   return (

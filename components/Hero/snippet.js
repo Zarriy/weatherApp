@@ -2,7 +2,7 @@ import { BoltIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 
 export default function DataSupport() {
-  const result = useSelector((state) => state.searchReducer);
+  const result = useSelector((state) => state.searchReducer.searchResult);
   const tempScale = useSelector((state) => state.tempReducer.unit);
 
   const data = [

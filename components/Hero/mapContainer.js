@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 export default function MapCont() {
   const widthBool = useSelector((state) => state.mapReducer);
-  const result = useSelector((state) => state.searchReducer);
+  const result = useSelector((state) => state.searchReducer.searchResult);
   const { lat, lon } = result.coord;
   const key = `${lat}-${lon}`;
   return (
