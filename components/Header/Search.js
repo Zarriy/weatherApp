@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { resultUpdater } from "@/store/searchSlice";
 
 export default function Search() {
   const [error, setError] = useState(false);
@@ -66,7 +67,13 @@ export default function Search() {
               ref={resultRef}
               className="absolute bg-white px-2 py-3 rounded-sm border border-t-0 top-8 w-full"
             >
-              <li className="text-sm flex gap-4 items-center hover:bg-zinc-100 p-1 px-2 rounded-sm cursor-pointer">
+              <li
+                onClick={() => {
+                  dispatch(resultUpdater(result));
+                  setResult(null);
+                }}
+                className="text-sm flex gap-4 items-center hover:bg-zinc-100 p-1 px-2 rounded-sm cursor-pointer"
+              >
                 <span className="flex gap-1 items-center flex-1">
                   {result.name}, {result.sys.country}
                   <Image

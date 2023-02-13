@@ -28,7 +28,7 @@ export default function CurrentReport() {
               </span>
             </div>
             <div className="flex gap-6 justify-between mt-2">
-              <div className="flex items-center">
+              <div className="flex items-center  pr-8">
                 <Image
                   width={70}
                   height={70}

@@ -17,7 +17,7 @@ export default function DataSupport() {
   ];
 
   return (
-    <ul className="border-l px-2 py-1 border-orange-400 max-w-[300px] flex flex-wrap gap-3">
+    <ul className="border-l px-2 py-1 border-orange-400 flex flex-wrap gap-3 max-w-[340px]">
       {data.map(({ Icon, title, value, unit }) => (
         <li key={value} className="flex items-center gap-1 text-sm">
           {Icon && <Icon className="w-4 h-4" />}
