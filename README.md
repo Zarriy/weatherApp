@@ -1,8 +1,8 @@
 ### About Project
 
-Weather App
+## Weather App
 
--[live Demo](https://zarriyweatherapp.netlify.app/)
+- [live Demo](https://zarriyweatherapp.netlify.app/)
 
 ![Weather App ScreenShot](https://raw.githubusercontent.com/Zarriy/weatherApp/main/public/weatherScreen.png)
 
