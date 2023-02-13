@@ -16,7 +16,7 @@ export default function MapCont() {
           height: 200,
           width: widthBool ? 400 : "auto",
         }}
-        initialViewState={{ longitude: lon, latitude: lat, zoom: 8 }}
+        initialViewState={{ longitude: lon, latitude: lat, zoom: 12 }}
       />
     </div>
   );
