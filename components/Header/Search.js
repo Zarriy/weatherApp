@@ -1,16 +1,22 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { resultUpdater } from "@/store/searchSlice";
 
 export default function Search() {
-  const [result, setResult] = useState(null);
   const [error, setError] = useState(false);
+  const tempScale = useSelector((state) => state.tempReducer.unit);
+  const tempSymbol = useSelector((state) => state.tempReducer.symbol);
+  const result = useSelector((state) => state.searchReducer);
+  const dispatch = useDispatch();
+
   const inputRef = useRef(null);
   const resultRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (resultRef.current && !resultRef.current.contains(e.target)) {
-        setResult(null);
+        dispatch(resultUpdater(null));
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -20,7 +26,7 @@ export default function Search() {
 
   const fetchData = async (searchQuery) => {
     const fetching = fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=33acfda1b05f90c39d450da10e3d77e3&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=33acfda1b05f90c39d450da10e3d77e3&units=${tempScale}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -28,7 +34,7 @@ export default function Search() {
         if (data.cod === "404") {
           setError(true);
         } else {
-          setResult(data);
+          dispatch(resultUpdater(data));
           setError(false);
         }
       })
@@ -71,7 +77,10 @@ export default function Search() {
                     height={20}
                   />
                 </span>
-                <span>{Math.round(result.main.temp)}&#8451;</span>
+                <span>
+                  {Math.round(result.main.temp)}
+                  {tempSymbol}
+                </span>
                 <span>
                   <Image
                     src={`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`}
