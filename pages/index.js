@@ -2,15 +2,31 @@ import Head from "next/head";
 import { Inter } from "@next/font/google";
 import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { resultUpdater } from "@/store/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { updateMapSize } from "@/store/mapSlice";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const tempScale = useSelector((state) => state.tempReducer.unit);
+  const result = useSelector((state) => state.searchReducer);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        dispatch(updateMapSize(false));
+      } else {
+        dispatch(updateMapSize(true));
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,7 +51,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Hero />
+      {result && <Hero />}
     </>
   );
 }
