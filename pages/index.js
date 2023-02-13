@@ -29,16 +29,18 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const city = result?.name;
     async function fetchData() {
       const fetching = fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=gujrat&appid=33acfda1b05f90c39d450da10e3d77e3&units=${tempScale}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${
+          city ? city.toLowerCase() : "gujrat"
+        }&appid=33acfda1b05f90c39d450da10e3d77e3&units=${tempScale}`
       )
         .then((res) => res.json())
         .then((data) => {
           dispatch(resultUpdater(data));
         });
     }
-
     fetchData();
   }, [tempScale]);
 

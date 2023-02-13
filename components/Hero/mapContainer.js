@@ -5,9 +5,7 @@ export default function MapCont() {
   const widthBool = useSelector((state) => state.mapReducer);
   const result = useSelector((state) => state.searchReducer);
   const { lat, lon } = result.coord;
-
   const key = `${lat}-${lon}`;
-
   return (
     <div className="">
       <Map
