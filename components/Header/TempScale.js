@@ -16,7 +16,7 @@ export default function TempScale() {
         <div
           className="cursor-pointer z-10 flex flex-1 justify-center"
           onClick={() =>
-            dispatch(updateTempScale({ un: "metric", sym: <> &#8451;</> }))
+            dispatch(updateTempScale({ un: "metric", sym: <>&#8451;</> }))
           }
         >
           Metrics: &#8451;, m/s
@@ -24,7 +24,7 @@ export default function TempScale() {
         <div
           className="cursor-pointer z-10 flex flex-1 justify-center"
           onClick={() =>
-            dispatch(updateTempScale({ un: "imperial", sym: <> &#8457;</> }))
+            dispatch(updateTempScale({ un: "imperial", sym: <>&#8457;</> }))
           }
         >
           Imperial: &#8457;, mph

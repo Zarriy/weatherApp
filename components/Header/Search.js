@@ -1,13 +1,12 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { resultUpdater } from "@/store/searchSlice";
 
 export default function Search() {
   const [error, setError] = useState(false);
+  const [result, setResult] = useState(null);
   const tempScale = useSelector((state) => state.tempReducer.unit);
   const tempSymbol = useSelector((state) => state.tempReducer.symbol);
-  const result = useSelector((state) => state.searchReducer);
   const dispatch = useDispatch();
 
   const inputRef = useRef(null);
@@ -16,13 +15,13 @@ export default function Search() {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (resultRef.current && !resultRef.current.contains(e.target)) {
-        dispatch(resultUpdater(null));
+        setResult(null);
       }
     };
     document.addEventListener("click", handleClickOutside);
 
     return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  }, [dispatch]);
 
   const fetchData = async (searchQuery) => {
     const fetching = fetch(
@@ -34,7 +33,7 @@ export default function Search() {
         if (data.cod === "404") {
           setError(true);
         } else {
-          dispatch(resultUpdater(data));
+          setResult(data);
           setError(false);
         }
       })
@@ -90,7 +89,7 @@ export default function Search() {
                   />
                 </span>
                 <span className="text-xs text-neutral-300">
-                  {result.coord.lon}, {result.coord.lat}
+                  {result.coord.lat},{result.coord.lon}
                 </span>
               </li>
             </ul>

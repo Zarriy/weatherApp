@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   unit: "metric",
-  symbol: <> &#8451;</>,
+  symbol: <>&#8451;</>,
 };
 
 const tempSlice = createSlice({
